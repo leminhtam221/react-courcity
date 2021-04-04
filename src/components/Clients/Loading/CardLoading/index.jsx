@@ -43,7 +43,7 @@ const renderHtml = (length, col) => {
             <Skeleton width={70} />
 
             <span className='d-flex justify-content-between align-items-center'>
-              <Skeleton width={40} className='mr-2' />
+              <Skeleton width={100} className='mr-2' />
               <Skeleton width={40} />
             </span>
           </p>
