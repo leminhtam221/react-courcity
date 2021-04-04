@@ -2,6 +2,7 @@ import categoryApi from "api/categoryApi";
 import coursesApi from "api/coursesApi";
 import CardLoaing from "components/Clients/Loading/CardLoading";
 import { importCustomScript } from "helper/customScript";
+import useImportScript from "hooks/importCustomScript";
 import React, { useEffect, useState } from "react";
 import AchiveGoal from "./components/achive-goal";
 import Banner from "./components/banner";
@@ -55,6 +56,8 @@ function HomePage() {
       document.body.removeChild(script);
     };
   }, [filter]);
+
+  useImportScript();
 
   const categoryLimit = [];
   if (categoryList.length > 0) {
