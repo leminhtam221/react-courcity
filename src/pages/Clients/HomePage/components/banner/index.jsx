@@ -1,9 +1,16 @@
 import React from "react";
-// import PropTypes from "prop-types";
+import PropTypes from "prop-types";
 
-// Banner.propTypes = {};
+Banner.propTypes = {
+  categoryList: PropTypes.array,
+};
 
-function Banner() {
+Banner.defaultProps = {
+  categoryList: [],
+};
+
+function Banner(props) {
+  const { categoryList } = props;
   return (
     <div className='main-banner'>
       <div className='hvrbox'>
@@ -31,9 +38,12 @@ function Banner() {
                   <div className='input-group-append styleSelect'>
                     <select id='inputGroupSelect01' defaultValue={"DEFAULT"}>
                       <option value='DEFAULT'>All Categories</option>
-                      <option value={1}>One</option>
-                      <option value={2}>Two</option>
-                      <option value={3}>Three</option>
+
+                      {categoryList.map((item) => (
+                        <option value={item.category_name} key={item.id}>
+                          {item.category_name}
+                        </option>
+                      ))}
                     </select>
                   </div>
                   <div className='input-group-append'>
