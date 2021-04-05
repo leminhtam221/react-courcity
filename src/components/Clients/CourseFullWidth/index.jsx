@@ -1,14 +1,22 @@
 import React from "react";
 import PropTypes from "prop-types";
+import "./course-full-width.css";
 
-CourseFullWidth.propTypes = {};
+CourseFullWidth.propTypes = {
+  course: PropTypes.object.isRequired,
+};
 
 function CourseFullWidth(props) {
+  const { course } = props;
   return (
     <div className='media'>
       <div className='media-left-image'>
         <div className='hvrbox'>
-          <img src='assets/images/1.jpg' alt='slide 1' className='hvrbox-layer_bottom' />
+          <img
+            src={course.course_image}
+            alt='slide 1'
+            className='hvrbox-layer_bottom image-cover'
+          />
           <div className='hvrbox-layer_top hvrbox-text'>
             <div className='hvrbox-text'>
               <a
@@ -25,15 +33,10 @@ function CourseFullWidth(props) {
       </div>
       <div className='media-body'>
         <h2>
-          <a href='course-single-one.html'>
-            {" "}
-            Learn Photoshop CC With Nir Eyal Complete Course{" "}
-          </a>
+          <a href='course-single-one.html'>{course.course_name}</a>
         </h2>
-        <h5>By Nir Eyal</h5>
-        <h4>
-          $49 <del>$69</del>
-        </h4>
+        <h5>{course.teacher.name}</h5>
+        <h4 className='mr-5'>${course.price}</h4>
         <a href='course-single-one.html' className='btn-bordered'>
           {" "}
           View Course{" "}
@@ -44,9 +47,7 @@ function CourseFullWidth(props) {
           <i className='fas fa-star' />
           <i className='fas fa-star' />
           <i className='fas fa-star' /> (4)
-          <span>
-            Enroll: 128 <i className='far fa-heart' />
-          </span>
+          <span>Enroll: {course.enroll}</span>
         </h3>
       </div>
     </div>

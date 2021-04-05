@@ -1,17 +1,27 @@
-import React from "react";
-import PropTypes from "prop-types";
-import FilterCategory from "../filter-category";
-import FilterPrice from "../filter-price";
-import Sort from "../sort";
-import NavTab from "../nav-tab";
-import Pagination from "components/Clients/Pagination";
 import Course from "components/Clients/Course";
 import CourseFullWidth from "components/Clients/CourseFullWidth";
+import CardLoaing from "components/Clients/Loading/CardLoading";
 import CardLoadingMedia from "components/Clients/Loading/CardLoadingMedia";
+import Pagination from "components/Clients/Pagination";
+import PropTypes from "prop-types";
+import React from "react";
+import FilterCategory from "../filter-category";
+import FilterPrice from "../filter-price";
+import NavTab from "../nav-tab";
+import Sort from "../sort";
 
-MainContainer.propTypes = {};
+MainContainer.propTypes = {
+  courseList: PropTypes.array,
+  loading: PropTypes.bool,
+};
+
+MainContainer.defaultProps = {
+  courseList: [],
+  loading: true,
+};
 
 function MainContainer(props) {
+  const { courseList, loading } = props;
   return (
     <div className='course-header-1x'>
       <div className='container'>
@@ -53,7 +63,11 @@ function MainContainer(props) {
                       <div className='row'>
                         <div className='all-course'>
                           <div className='row'>
-                            <div className='col-md-4 tile web'>{/* <Course /> */}</div>
+                            {loading ? (
+                              <CardLoaing col={4} length={6} />
+                            ) : (
+                              renderCourses(courseList)
+                            )}
                           </div>
                         </div>
                       </div>
@@ -68,7 +82,11 @@ function MainContainer(props) {
                   aria-labelledby='home-tab'
                 >
                   <div className='all-course-list'>
-                    <CourseFullWidth />
+                    {loading ? (
+                      <CardLoadingMedia length={6} />
+                    ) : (
+                      renderCoursesFullWidth(courseList)
+                    )}
                   </div>
                 </div>
               </div>
@@ -82,4 +100,15 @@ function MainContainer(props) {
   );
 }
 
+const renderCourses = (coursesList) => {
+  return coursesList.map((item) => (
+    <div className={`col-md-4`} key={item.id}>
+      <Course course={item} />
+    </div>
+  ));
+};
+
+const renderCoursesFullWidth = (coursesList) => {
+  return coursesList.map((item) => <CourseFullWidth key={item.id} course={item} />);
+};
 export default MainContainer;

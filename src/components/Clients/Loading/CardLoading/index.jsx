@@ -15,15 +15,7 @@ CardLoaing.defaultProps = {
 function CardLoaing(props) {
   const { length, col } = props;
 
-  return (
-    <div className='container'>
-      <div className='row'>
-        <div className='col-md-12'>
-          <div className='row'>{renderHtml(length, col)}</div>
-        </div>
-      </div>
-    </div>
-  );
+  return <React.Fragment>{renderHtml(length, col)}</React.Fragment>;
 }
 
 const renderHtml = (length, col) => {
@@ -36,17 +28,11 @@ const renderHtml = (length, col) => {
         <div className='single-course-content'>
           <a href='course-single.html'>
             <Skeleton />
-            <Skeleton width='76%' />
+            <Skeleton width='100%' />
           </a>
 
-          <p className='d-flex justify-content-between align-items-center'>
-            <Skeleton width={70} />
+          <Skeleton width='94%' />
 
-            <span className='d-flex justify-content-between align-items-center'>
-              <Skeleton width={100} className='mr-2' />
-              <Skeleton width={40} />
-            </span>
-          </p>
           <h3 className='d-flex justify-content-between'>
             <span>
               <Skeleton width={120} />

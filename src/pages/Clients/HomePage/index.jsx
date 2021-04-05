@@ -1,8 +1,8 @@
 import categoryApi from "api/categoryApi";
 import coursesApi from "api/coursesApi";
 import CardLoaing from "components/Clients/Loading/CardLoading";
-import { importCustomScript } from "helper/customScript";
-import useImportScript from "hooks/importCustomScript";
+import { reReRenderScript } from "helper/re-render-script";
+import useImportScript from "hooks/import-custom-script";
 import React, { useEffect, useState } from "react";
 import AchiveGoal from "./components/achive-goal";
 import Banner from "./components/banner";
@@ -23,21 +23,19 @@ function HomePage() {
     _expand: "teacher",
   });
 
+  useImportScript();
+
   useEffect(() => {
     const fetchApiData = async () => {
-      setLoading(true);
       try {
         const categoryData = await categoryApi.getAll();
         setCategoryList(categoryData.data);
       } catch (error) {}
-      setLoading(false);
     };
     fetchApiData();
   }, []);
 
   useEffect(() => {
-    let script;
-
     const fetchListCourse = async () => {
       setLoading(true);
 
@@ -46,18 +44,12 @@ function HomePage() {
         setCourseList(courseData.data);
       } catch (error) {}
 
+      reReRenderScript();
       setLoading(false);
-      script = importCustomScript();
     };
 
     fetchListCourse();
-
-    return () => {
-      document.body.removeChild(script);
-    };
   }, [filter]);
-
-  useImportScript();
 
   const categoryLimit = [];
   if (categoryList.length > 0) {
@@ -71,7 +63,7 @@ function HomePage() {
       <Banner categoryList={categoryList} />
       <Category categoryList={categoryLimit} />
       {loading ? (
-        <CardLoaing col={3} length={filter._limit} />
+        renderLoading(filter._limit)
       ) : (
         <TopCourses courseList={courseList} categoryList={categoryLimit} />
       )}
@@ -82,5 +74,15 @@ function HomePage() {
     </React.Fragment>
   );
 }
+
+const renderLoading = (length) => {
+  return (
+    <div className='container'>
+      <div className='row'>
+        <CardLoaing col={3} length={length} />
+      </div>
+    </div>
+  );
+};
 
 export default HomePage;

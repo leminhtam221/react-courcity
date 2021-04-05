@@ -9,5 +9,5 @@ export default function useImportScript() {
     return () => {
       document.body.removeChild(script);
     };
-  });
+  }, []);
 }

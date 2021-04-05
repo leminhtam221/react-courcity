@@ -3,11 +3,7 @@ import PropTypes from "prop-types";
 import "./course.css";
 
 Course.propTypes = {
-  course: PropTypes.object,
-};
-
-Course.defaultProps = {
-  course: null,
+  course: PropTypes.object.isRequired,
 };
 
 function Course(props) {
@@ -39,7 +35,7 @@ function Course(props) {
         <p>
           {course.teacher.name}
           <span>
-            <del>${course.price}</del>
+            <b>${course.price}</b>
           </span>
         </p>
         <h3>

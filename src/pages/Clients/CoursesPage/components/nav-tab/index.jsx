@@ -1,9 +1,6 @@
 import React from "react";
-import PropTypes from "prop-types";
 
-NavTab.propTypes = {};
-
-function NavTab(props) {
+function NavTab() {
   return (
     <div className='course-tab'>
       <p>All prices are in USD</p>

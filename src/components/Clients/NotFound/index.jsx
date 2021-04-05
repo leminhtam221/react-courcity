@@ -1,4 +1,4 @@
-import useImportScript from "hooks/importCustomScript";
+import useImportScript from "hooks/import-custom-script";
 import React from "react";
 import { Link } from "react-router-dom";
 

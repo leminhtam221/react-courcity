@@ -1,9 +1,6 @@
 import React from "react";
-import PropTypes from "prop-types";
 
-Banner.propTypes = {};
-
-function Banner(props) {
+function Banner() {
   return (
     <div className='main-banner course-list-banner'>
       <div className='hvrbox'>
