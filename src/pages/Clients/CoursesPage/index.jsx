@@ -21,7 +21,7 @@ function CoursesPage() {
     ...queryParams,
     _sort: queryParams._sort || "id",
     _order: queryParams._order || "desc",
-    _expand: queryParams._expand || "teacher",
+    _expand: "teacher",
     _page: parseInt(queryParams._page) || 1,
     _limit: parseInt(queryParams._limit) || 6,
   }));

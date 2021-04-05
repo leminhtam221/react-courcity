@@ -8,14 +8,14 @@ function Pagination() {
   const { _limit, _page, total } = pagination;
   const dispatch = useDispatch();
 
-  const total_pageNumber = Math.ceil(total / _limit);
+  const totalPageNumber = Math.ceil(total / _limit);
   const handlePagePrevious = () => {
     if (_page <= 1) return;
     const action = onPagePrevious();
     dispatch(action);
   };
   const handlePageNext = () => {
-    if (_page >= total_pageNumber) return;
+    if (_page >= totalPageNumber) return;
     const action = onPageNext();
     dispatch(action);
   };
@@ -37,10 +37,10 @@ function Pagination() {
             </span>
           </li>
 
-          {render_pageNumber(total_pageNumber, _page, handlePageChange)}
+          {renderPageNumber(totalPageNumber, _page, handlePageChange)}
 
           <li
-            className={`page-item cursor ${_page >= total_pageNumber ? "disabled" : ""}`}
+            className={`page-item cursor ${_page >= totalPageNumber ? "disabled" : ""}`}
             onClick={() => handlePageNext()}
           >
             <span className='page-link'>
@@ -53,7 +53,7 @@ function Pagination() {
   );
 }
 
-const render_pageNumber = (total, _page, handlePageChange) => {
+const renderPageNumber = (total, _page, handlePageChange) => {
   return Array.from(new Array(total)).map((item, index) => (
     <li
       className={`page-item cursor ${_page === index + 1 ? "active" : ""}`}
