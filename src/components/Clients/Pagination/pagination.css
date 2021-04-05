@@ -1,0 +1,6 @@
+.cursor {
+  cursor: pointer;
+}
+.disabled {
+  cursor: no-drop;
+}

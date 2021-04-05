@@ -9,7 +9,7 @@ Course.propTypes = {
 function Course(props) {
   const { course } = props;
   return (
-    <div className='single-course'>
+    <div className='single-course cover'>
       <div className='hvrbox'>
         <img
           src={course.course_image}

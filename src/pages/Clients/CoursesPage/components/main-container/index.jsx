@@ -13,15 +13,31 @@ import Sort from "../sort";
 MainContainer.propTypes = {
   courseList: PropTypes.array,
   loading: PropTypes.bool,
+  pagination: PropTypes.object,
+  onPageChange: PropTypes.func,
+  onPagePrevious: PropTypes.func,
+  onPageNext: PropTypes.func,
 };
 
 MainContainer.defaultProps = {
   courseList: [],
   loading: true,
+  pagination: {},
+  onPageChange: null,
+  onPagePrevious: null,
+  onPageNext: null,
 };
 
 function MainContainer(props) {
-  const { courseList, loading } = props;
+  const {
+    courseList,
+    loading,
+    pagination,
+    onPageChange,
+    onPagePrevious,
+    onPageNext,
+  } = props;
+  const { _page, _limit, total } = pagination;
   return (
     <div className='course-header-1x'>
       <div className='container'>
@@ -91,7 +107,14 @@ function MainContainer(props) {
                 </div>
               </div>
 
-              <Pagination />
+              <Pagination
+                page={_page}
+                limit={_limit}
+                total={total}
+                onPageChange={onPageChange}
+                onPagePrevious={onPagePrevious}
+                onPageNext={onPageNext}
+              />
             </div>
           </div>
         </div>
