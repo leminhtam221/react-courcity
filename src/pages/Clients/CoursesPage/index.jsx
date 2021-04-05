@@ -7,7 +7,8 @@ import { useHistory, useLocation } from "react-router";
 import Banner from "./components/banner";
 import MainContainer from "./components/main-container";
 import queryString from "query-string";
-
+import { setPagination } from "redux/paginationSlice";
+import { useDispatch, useSelector } from "react-redux";
 function CoursesPage() {
   const history = useHistory();
   const location = useLocation();
@@ -24,13 +25,20 @@ function CoursesPage() {
     _page: parseInt(queryParams._page) || 1,
     _limit: parseInt(queryParams._limit) || 6,
   }));
-  const [pagination, setPagination] = useState({
-    _page: filter._page,
-    _limit: filter._limit,
-    total: 0,
-  });
+
+  const pagination = useSelector((state) => state.pagination);
+  const [paginationSynchronized, setPaginationSynchronized] = useState(false);
+
+  const dispatch = useDispatch();
 
   useImportScript();
+
+  useEffect(() => {
+    history.push({
+      pathname: history.location.pathname,
+      search: queryString.stringify(filter),
+    });
+  }, [history, filter]);
 
   useEffect(() => {
     const fetchApiData = async () => {
@@ -41,7 +49,6 @@ function CoursesPage() {
     };
     fetchApiData();
   }, []);
-
   useEffect(() => {
     const fetchListCourse = async () => {
       setLoading(true);
@@ -49,11 +56,13 @@ function CoursesPage() {
       try {
         const courseData = await coursesApi.getAll({ ...filter });
         const total = parseInt(courseData.headers["x-total-count"]);
-        setPagination({
+        const pagination = {
           _page: filter._page,
           _limit: filter._limit,
           total,
-        });
+        };
+        const action = setPagination(pagination);
+        dispatch(action);
         setCourseList(courseData.data);
       } catch (error) {}
 
@@ -62,42 +71,24 @@ function CoursesPage() {
     };
 
     fetchListCourse();
-    history.push({
-      pathname: history.location.pathname,
-      search: queryString.stringify(filter),
-    });
-  }, [history, filter]);
+  }, [filter, dispatch]);
 
-  const handlePageChane = (pageNumber) => {
-    setFilter({
-      ...filter,
-      _page: pageNumber,
-    });
-  };
-  const handlePagePrevious = () => {
-    setFilter({
-      ...filter,
-      _page: filter._page - 1,
-    });
-  };
-  const handlePageNext = () => {
-    setFilter({
-      ...filter,
-      _page: filter._page + 1,
-    });
-  };
+  useEffect(() => {
+    if (paginationSynchronized) {
+      setFilter({
+        ...filter,
+        _page: pagination._page,
+        _limit: pagination._limit,
+      });
+    }
+    setPaginationSynchronized(true);
+    // eslint-disable-next-line
+  }, [pagination]);
 
   return (
     <React.Fragment>
       <Banner />
-      <MainContainer
-        courseList={courseList}
-        loading={loading}
-        pagination={pagination}
-        onPageChange={handlePageChane}
-        onPagePrevious={handlePagePrevious}
-        onPageNext={handlePageNext}
-      />
+      <MainContainer courseList={courseList} loading={loading} />
     </React.Fragment>
   );
 }

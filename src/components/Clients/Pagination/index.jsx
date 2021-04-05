@@ -1,42 +1,35 @@
 import React from "react";
-import PropTypes from "prop-types";
 import "./pagination.css";
+import { useDispatch, useSelector } from "react-redux";
+import { onPageChange, onPagePrevious, onPageNext } from "redux/paginationSlice";
 
-Pagination.propTypes = {
-  page: PropTypes.number,
-  limit: PropTypes.number,
-  total: PropTypes.number,
-  onPageChange: PropTypes.func,
-  onPagePrevious: PropTypes.func,
-  onPageNext: PropTypes.func,
-};
+function Pagination() {
+  const pagination = useSelector((state) => state.pagination);
+  const { _limit, _page, total } = pagination;
+  const dispatch = useDispatch();
 
-Pagination.defaultProps = {
-  page: 1,
-  limit: 6,
-  total: 0,
-  onPageChange: null,
-  onPagePrevious: null,
-  onPageNext: null,
-};
-
-function Pagination(props) {
-  const { total, limit, page, onPageChange, onPagePrevious, onPageNext } = props;
-  const totalPageNumber = Math.ceil(total / limit);
+  const total_pageNumber = Math.ceil(total / _limit);
   const handlePagePrevious = () => {
-    if (page <= 1) return;
-    onPagePrevious();
+    if (_page <= 1) return;
+    const action = onPagePrevious();
+    dispatch(action);
   };
   const handlePageNext = () => {
-    if (page >= totalPageNumber) return;
-    onPageNext();
+    if (_page >= total_pageNumber) return;
+    const action = onPageNext();
+    dispatch(action);
   };
+  const handlePageChange = (pageNumber) => {
+    const action = onPageChange(pageNumber);
+    dispatch(action);
+  };
+
   return (
     <div className='col-md-12'>
       <div className='course-pagination'>
         <ul className='pagination'>
           <li
-            className={`page-item cursor ${page <= 1 ? "disabled" : ""}`}
+            className={`page-item cursor ${_page <= 1 ? "disabled" : ""}`}
             onClick={() => handlePagePrevious()}
           >
             <span className='page-link'>
@@ -44,10 +37,10 @@ function Pagination(props) {
             </span>
           </li>
 
-          {renderPageNumber(totalPageNumber, page, onPageChange)}
+          {render_pageNumber(total_pageNumber, _page, handlePageChange)}
 
           <li
-            className={`page-item cursor ${page >= totalPageNumber ? "disabled" : ""}`}
+            className={`page-item cursor ${_page >= total_pageNumber ? "disabled" : ""}`}
             onClick={() => handlePageNext()}
           >
             <span className='page-link'>
@@ -60,13 +53,13 @@ function Pagination(props) {
   );
 }
 
-const renderPageNumber = (total, page, onPageChange) => {
+const render_pageNumber = (total, _page, handlePageChange) => {
   return Array.from(new Array(total)).map((item, index) => (
     <li
-      className={`page-item cursor ${page === index + 1 ? "active" : ""}`}
+      className={`page-item cursor ${_page === index + 1 ? "active" : ""}`}
       key={index}
       onClick={() => {
-        onPageChange(index + 1);
+        handlePageChange(index + 1);
       }}
     >
       <span className='page-link'>{index + 1}</span>
