@@ -15,6 +15,7 @@ MainContainer.propTypes = {
   categoryList: PropTypes.array,
   loading: PropTypes.bool,
   onCategoryChange: PropTypes.func,
+  onSortChange: PropTypes.func,
 };
 
 MainContainer.defaultProps = {
@@ -22,10 +23,11 @@ MainContainer.defaultProps = {
   categoryList: [],
   loading: true,
   onCategoryChange: null,
+  onSortChange: null,
 };
 
 function MainContainer(props) {
-  const { courseList, categoryList, loading, onCategoryChange } = props;
+  const { courseList, categoryList, loading, onCategoryChange, onSortChange } = props;
   return (
     <div className='course-header-1x'>
       <div className='container'>
@@ -50,7 +52,7 @@ function MainContainer(props) {
             <div className='course-header-right'>
               <div className='row'>
                 <div className='col-md-6'>
-                  <Sort />
+                  <Sort onSortChange={onSortChange} />
                 </div>
                 <div className='col-md-6'>
                   <NavTab />

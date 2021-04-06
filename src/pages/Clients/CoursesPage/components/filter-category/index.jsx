@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import "./filter.css";
+import { useLocation } from "react-router";
+import queryString from "query-string";
 
 FilterCategory.propTypes = {
   categoryList: PropTypes.array,
@@ -13,7 +15,12 @@ FilterCategory.defaultProps = {
 
 function FilterCategory(props) {
   const { categoryList, onCategoryChange } = props;
-  const [active, setActive] = useState(0);
+  const location = useLocation();
+  const queryParams = queryString.parse(location.search);
+  const [active, setActive] = useState(() => {
+    if (!queryParams.categoryId) return 0;
+    return Number.parseInt(queryParams.categoryId);
+  });
 
   const countTotalCourse = categoryList.reduce((total, item) => {
     return total + item.courses.length;

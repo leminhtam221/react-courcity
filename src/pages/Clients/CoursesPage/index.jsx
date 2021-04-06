@@ -98,6 +98,14 @@ function CoursesPage() {
     }
   };
 
+  const handleSortChange = (objSort) => {
+    setFilter({
+      ...filter,
+      _order: objSort.order,
+      _sort: objSort.sort,
+    });
+  };
+
   return (
     <React.Fragment>
       <Banner />
@@ -106,6 +114,7 @@ function CoursesPage() {
         loading={loading}
         categoryList={categoryList}
         onCategoryChange={handleCategoryChange}
+        onSortChange={handleSortChange}
       />
     </React.Fragment>
   );
