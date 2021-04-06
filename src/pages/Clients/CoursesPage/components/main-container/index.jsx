@@ -12,16 +12,20 @@ import Sort from "../sort";
 
 MainContainer.propTypes = {
   courseList: PropTypes.array,
+  categoryList: PropTypes.array,
   loading: PropTypes.bool,
+  onCategoryChange: PropTypes.func,
 };
 
 MainContainer.defaultProps = {
   courseList: [],
+  categoryList: [],
   loading: true,
+  onCategoryChange: null,
 };
 
 function MainContainer(props) {
-  const { courseList, loading } = props;
+  const { courseList, categoryList, loading, onCategoryChange } = props;
   return (
     <div className='course-header-1x'>
       <div className='container'>
@@ -34,7 +38,10 @@ function MainContainer(props) {
             </div>
             <div className='course-header-left'>
               <div id='accordion'>
-                <FilterCategory />
+                <FilterCategory
+                  categoryList={categoryList}
+                  onCategoryChange={onCategoryChange}
+                />
                 <FilterPrice />
               </div>
             </div>

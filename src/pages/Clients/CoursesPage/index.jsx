@@ -43,7 +43,7 @@ function CoursesPage() {
   useEffect(() => {
     const fetchApiData = async () => {
       try {
-        const categoryData = await categoryApi.getAll();
+        const categoryData = await categoryApi.getAll({ _embed: "courses" });
         setCategoryList(categoryData.data);
       } catch (error) {}
     };
@@ -85,10 +85,28 @@ function CoursesPage() {
     // eslint-disable-next-line
   }, [pagination]);
 
+  const handleCategoryChange = (idCategory) => {
+    if (idCategory === 0) {
+      const newFilter = { ...filter };
+      delete newFilter.categoryId;
+      setFilter(newFilter);
+    } else {
+      setFilter({
+        ...filter,
+        categoryId: idCategory,
+      });
+    }
+  };
+
   return (
     <React.Fragment>
       <Banner />
-      <MainContainer courseList={courseList} loading={loading} />
+      <MainContainer
+        courseList={courseList}
+        loading={loading}
+        categoryList={categoryList}
+        onCategoryChange={handleCategoryChange}
+      />
     </React.Fragment>
   );
 }
