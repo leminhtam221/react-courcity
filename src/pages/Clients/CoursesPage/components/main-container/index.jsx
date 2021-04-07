@@ -8,6 +8,7 @@ import React from "react";
 import FilterCategory from "../filter-category";
 import FilterPrice from "../filter-price";
 import NavTab from "../nav-tab";
+import RemoveFilter from "../remove-filter";
 import Sort from "../sort";
 
 MainContainer.propTypes = {
@@ -18,6 +19,7 @@ MainContainer.propTypes = {
   onSortChange: PropTypes.func,
   onPriceLowChange: PropTypes.func,
   onPriceHighChange: PropTypes.func,
+  onClickRemoveFilter: PropTypes.func,
 };
 
 MainContainer.defaultProps = {
@@ -28,6 +30,7 @@ MainContainer.defaultProps = {
   onSortChange: null,
   onPriceLowChange: null,
   onPriceHighChange: null,
+  onClickRemoveFilter: null,
 };
 
 function MainContainer(props) {
@@ -39,17 +42,15 @@ function MainContainer(props) {
     onSortChange,
     onPriceLowChange,
     onPriceHighChange,
+    onClickRemoveFilter,
   } = props;
   return (
     <div className='course-header-1x'>
       <div className='container'>
         <div className='row'>
           <div className='col-md-3'>
-            <div className='course-header-left-top'>
-              <p>
-                <img src='assets/images/cross.png' alt='remove filter' /> Remove Filter
-              </p>
-            </div>
+            <RemoveFilter onClickRemoveFilter={onClickRemoveFilter} />
+
             <div className='course-header-left'>
               <div id='accordion'>
                 <FilterCategory

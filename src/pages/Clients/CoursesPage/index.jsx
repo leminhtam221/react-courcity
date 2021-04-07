@@ -17,6 +17,7 @@ function CoursesPage() {
   const [loading, setLoading] = useState(true);
   const [courseList, setCourseList] = useState([]);
   const [categoryList, setCategoryList] = useState([]);
+
   const [filter, setFilter] = useState(() => ({
     ...queryParams,
     _sort: queryParams._sort || "id",
@@ -122,6 +123,9 @@ function CoursesPage() {
     });
   };
 
+  const handleRemoveFilter = (defaultFilter) => {
+    setFilter({ ...defaultFilter });
+  };
   return (
     <React.Fragment>
       <Banner />
@@ -133,6 +137,7 @@ function CoursesPage() {
         onSortChange={handleSortChange}
         onPriceLowChange={handlePriceLowChange}
         onPriceHighChange={handlePriceHighChange}
+        onClickRemoveFilter={handleRemoveFilter}
       />
     </React.Fragment>
   );

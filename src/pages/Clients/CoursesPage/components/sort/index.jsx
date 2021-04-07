@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { sort } from "constant/filter";
 import { useLocation } from "react-router";
@@ -14,8 +14,9 @@ Sort.defaultProps = {
 function Sort(props) {
   const { onSortChange } = props;
   const location = useLocation();
+  const queryParams = queryString.parse(location.search);
+
   const [active, setActive] = useState(() => {
-    const queryParams = queryString.parse(location.search);
     const findItem = findItemActive(queryParams);
     if (findItem[0]) return findItem[0].id;
     return 1;
@@ -26,8 +27,18 @@ function Sort(props) {
     const id = parseInt(value);
     const objSort = sort.filter((item) => item.id === id);
     if (onSortChange) onSortChange(objSort[0]);
-    setActive(id);
   };
+
+  useEffect(() => {
+    if (queryParams._order && queryParams._sort) {
+      const sortParams = queryParams._sort;
+      const orderParams = queryParams._order;
+      const objSort = sort.filter(
+        (item) => item.sort === sortParams && item.order === orderParams
+      );
+      setActive(objSort[0].id);
+    }
+  }, [queryParams._order, queryParams._sort]);
 
   return (
     <div className='search-box d-flex flex-row'>

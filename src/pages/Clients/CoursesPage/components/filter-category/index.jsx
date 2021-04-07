@@ -1,8 +1,8 @@
-import React, { useState } from "react";
 import PropTypes from "prop-types";
-import "./filter.css";
-import { useLocation } from "react-router";
 import queryString from "query-string";
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router";
+import "./filter.css";
 
 FilterCategory.propTypes = {
   categoryList: PropTypes.array,
@@ -27,11 +27,19 @@ function FilterCategory(props) {
   }, 0);
 
   const handleClickCategory = (idCategory) => {
-    setActive(idCategory);
     if (onCategoryChange) {
       onCategoryChange(idCategory);
     }
   };
+
+  useEffect(() => {
+    if (!queryParams.categoryId) {
+      setActive(0);
+    } else {
+      const idCategory = parseInt(queryParams.categoryId);
+      setActive(idCategory);
+    }
+  }, [queryParams.categoryId]);
 
   return (
     <div className='card'>

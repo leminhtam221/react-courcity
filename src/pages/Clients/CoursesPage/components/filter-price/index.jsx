@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { priceLow, priceHigh } from "constant/filter";
 import { useLocation } from "react-router";
@@ -17,17 +17,16 @@ function FilterPrice(props) {
   const { onPriceLowChange, onPriceHighChange } = props;
 
   const location = useLocation();
+  const queryParams = queryString.parse(location.search);
 
   const [activePriceLow, setActivePriceLow] = useState(() => {
-    const queryParams = queryString.parse(location.search);
     const findItem = findItemActivePriceLow(queryParams, priceLow);
     if (findItem[0]) return findItem[0].value;
 
     return 0;
   });
   const [activePriceHigh, setActivePriceHigh] = useState(() => {
-    const queryParams = queryString.parse(location.search);
-    const findItem = findItemActivePriceHigh(queryParams, priceLow);
+    const findItem = findItemActivePriceHigh(queryParams, priceHigh);
     if (findItem[0]) return findItem[0].value;
 
     return 1500;
@@ -36,17 +35,26 @@ function FilterPrice(props) {
   const handlePriceLowChange = (e) => {
     const { value } = e.target;
     const newValue = parseInt(value);
-    console.log(newValue, "newValue");
     if (onPriceLowChange) onPriceLowChange(newValue);
-    setActivePriceLow(newValue);
   };
 
   const handlePriceHighChange = (e) => {
     const { value } = e.target;
     const newValue = parseInt(value);
     if (onPriceHighChange) onPriceHighChange(newValue);
-    setActivePriceHigh(newValue);
   };
+
+  useEffect(() => {
+    if (queryParams.price_gte) {
+      const price = parseInt(queryParams.price_gte);
+      setActivePriceLow(price);
+    }
+    if (queryParams.price_lte) {
+      const price = parseInt(queryParams.price_lte);
+      console.log(price);
+      setActivePriceHigh(price);
+    }
+  }, [queryParams.price_gte, queryParams.price_lte]);
 
   return (
     <div className='card'>
