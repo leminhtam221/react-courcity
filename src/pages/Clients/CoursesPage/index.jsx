@@ -24,6 +24,8 @@ function CoursesPage() {
     _expand: "teacher",
     _page: parseInt(queryParams._page) || 1,
     _limit: parseInt(queryParams._limit) || 6,
+    price_gte: parseInt(queryParams.price_gte) || 0,
+    price_lte: parseInt(queryParams.price_lte) || 1500,
   }));
 
   const pagination = useSelector((state) => state.pagination);
@@ -106,6 +108,20 @@ function CoursesPage() {
     });
   };
 
+  const handlePriceLowChange = (newPrice) => {
+    setFilter({
+      ...filter,
+      price_gte: newPrice,
+    });
+  };
+
+  const handlePriceHighChange = (newPrice) => {
+    setFilter({
+      ...filter,
+      price_lte: newPrice,
+    });
+  };
+
   return (
     <React.Fragment>
       <Banner />
@@ -115,6 +131,8 @@ function CoursesPage() {
         categoryList={categoryList}
         onCategoryChange={handleCategoryChange}
         onSortChange={handleSortChange}
+        onPriceLowChange={handlePriceLowChange}
+        onPriceHighChange={handlePriceHighChange}
       />
     </React.Fragment>
   );

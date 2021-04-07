@@ -16,6 +16,8 @@ MainContainer.propTypes = {
   loading: PropTypes.bool,
   onCategoryChange: PropTypes.func,
   onSortChange: PropTypes.func,
+  onPriceLowChange: PropTypes.func,
+  onPriceHighChange: PropTypes.func,
 };
 
 MainContainer.defaultProps = {
@@ -24,10 +26,20 @@ MainContainer.defaultProps = {
   loading: true,
   onCategoryChange: null,
   onSortChange: null,
+  onPriceLowChange: null,
+  onPriceHighChange: null,
 };
 
 function MainContainer(props) {
-  const { courseList, categoryList, loading, onCategoryChange, onSortChange } = props;
+  const {
+    courseList,
+    categoryList,
+    loading,
+    onCategoryChange,
+    onSortChange,
+    onPriceLowChange,
+    onPriceHighChange,
+  } = props;
   return (
     <div className='course-header-1x'>
       <div className='container'>
@@ -44,7 +56,10 @@ function MainContainer(props) {
                   categoryList={categoryList}
                   onCategoryChange={onCategoryChange}
                 />
-                <FilterPrice />
+                <FilterPrice
+                  onPriceLowChange={onPriceLowChange}
+                  onPriceHighChange={onPriceHighChange}
+                />
               </div>
             </div>
           </div>

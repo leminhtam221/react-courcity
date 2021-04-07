@@ -14,12 +14,9 @@ Sort.defaultProps = {
 function Sort(props) {
   const { onSortChange } = props;
   const location = useLocation();
-  const queryParams = queryString.parse(location.search);
-
-  const findItem = sort.filter(
-    (item) => item.sort === queryParams._sort && item.order === queryParams._order
-  );
   const [active, setActive] = useState(() => {
+    const queryParams = queryString.parse(location.search);
+    const findItem = findItemActive(queryParams);
     if (findItem[0]) return findItem[0].id;
     return 1;
   });
@@ -49,5 +46,12 @@ function Sort(props) {
     </div>
   );
 }
+
+const findItemActive = (queryParams) => {
+  const findItem = sort.filter(
+    (item) => item.sort === queryParams._sort && item.order === queryParams._order
+  );
+  return findItem;
+};
 
 export default Sort;
