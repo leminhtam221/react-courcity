@@ -2,5 +2,5 @@
   cursor: pointer;
 }
 .disabled {
-  cursor: no-drop;
+  cursor: no-drop !important;
 }

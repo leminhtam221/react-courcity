@@ -1,7 +1,7 @@
 import React from "react";
-import "./pagination.css";
 import { useDispatch, useSelector } from "react-redux";
-import { onPageChange, onPagePrevious, onPageNext } from "redux/paginationSlice";
+import { onPageChange, onPageNext, onPagePrevious } from "redux/paginationSlice";
+import "./pagination.css";
 
 function Pagination() {
   const pagination = useSelector((state) => state.pagination);
@@ -30,6 +30,16 @@ function Pagination() {
         <ul className='pagination'>
           <li
             className={`page-item cursor ${_page <= 1 ? "disabled" : ""}`}
+            onClick={() => handlePageChange(1)}
+          >
+            <span className='page-link'>
+              <i className='fas fa-angle-left' />
+              <i className='fas fa-angle-left' />
+            </span>
+          </li>
+
+          <li
+            className={`page-item cursor ${_page <= 1 ? "disabled" : ""}`}
             onClick={() => handlePagePrevious()}
           >
             <span className='page-link'>
@@ -44,6 +54,16 @@ function Pagination() {
             onClick={() => handlePageNext()}
           >
             <span className='page-link'>
+              <i className='fas fa-angle-right' />
+            </span>
+          </li>
+
+          <li
+            className={`page-item cursor ${_page >= totalPageNumber ? "disabled" : ""}`}
+            onClick={() => handlePageChange(totalPageNumber)}
+          >
+            <span className='page-link'>
+              <i className='fas fa-angle-right' />
               <i className='fas fa-angle-right' />
             </span>
           </li>

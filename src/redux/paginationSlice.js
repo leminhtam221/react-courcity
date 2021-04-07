@@ -12,7 +12,12 @@ const paginationSlice = createSlice({
   reducers: {
     setPagination(state, action) {
       const { _page, _limit, total } = action.payload;
-      state._page = _page;
+      const totalPage = Math.ceil(total / _limit);
+      if (_page > totalPage) {
+        state._page = 1;
+      } else {
+        state._page = _page;
+      }
       state._limit = _limit;
       state.total = total;
     },
