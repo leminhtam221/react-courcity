@@ -1,5 +1,5 @@
 import queryString from "query-string";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useLocation } from "react-router";
 import "./remove-filter.css";
 import PropTypes from "prop-types";
@@ -14,15 +14,17 @@ RemoveFilter.defaultProps = {
 function RemoveFilter(props) {
   const { onClickRemoveFilter } = props;
 
-  const defaultFilter = {
-    _sort: "id",
-    _order: "desc",
-    _expand: "teacher",
-    _page: 1,
-    _limit: 6,
-    price_gte: 0,
-    price_lte: 1500,
-  };
+  const defaultFilter = useMemo(() => {
+    return {
+      _sort: "id",
+      _order: "desc",
+      _expand: "teacher",
+      _page: 1,
+      _limit: 6,
+      price_gte: 0,
+      price_lte: 1500,
+    };
+  }, []);
   const location = useLocation();
   const [hiddenFilter, setHiddenFilter] = useState(true);
   const queryParams = queryString.parse(location.search);
@@ -48,7 +50,7 @@ function RemoveFilter(props) {
         else setHiddenFilter(true);
       }
     }
-  }, [queryParams]);
+  }, [queryParams, defaultFilter]);
 
   const handleCLickRemoveFilter = () => {
     if (!onClickRemoveFilter) return;

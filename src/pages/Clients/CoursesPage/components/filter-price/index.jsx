@@ -51,7 +51,6 @@ function FilterPrice(props) {
     }
     if (queryParams.price_lte) {
       const price = parseInt(queryParams.price_lte);
-      console.log(price);
       setActivePriceHigh(price);
     }
   }, [queryParams.price_gte, queryParams.price_lte]);
