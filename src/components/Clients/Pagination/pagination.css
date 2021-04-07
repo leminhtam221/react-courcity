@@ -1,6 +1,7 @@
 .cursor {
   cursor: pointer;
 }
-.disabled {
-  cursor: no-drop !important;
+.hide-item {
+  display: none;
+  visibility: hidden;
 }

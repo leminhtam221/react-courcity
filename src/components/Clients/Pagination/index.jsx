@@ -29,7 +29,7 @@ function Pagination() {
       <div className='course-pagination'>
         <ul className='pagination'>
           <li
-            className={`page-item cursor ${_page <= 1 ? "disabled" : ""}`}
+            className={`page-item cursor ${_page <= 1 ? "hide-item" : ""}`}
             onClick={() => handlePageChange(1)}
           >
             <span className='page-link'>
@@ -39,7 +39,7 @@ function Pagination() {
           </li>
 
           <li
-            className={`page-item cursor ${_page <= 1 ? "disabled" : ""}`}
+            className={`page-item cursor ${_page <= 1 ? "hide-item" : ""}`}
             onClick={() => handlePagePrevious()}
           >
             <span className='page-link'>
@@ -50,7 +50,7 @@ function Pagination() {
           {renderPageNumber(totalPageNumber, _page, handlePageChange)}
 
           <li
-            className={`page-item cursor ${_page >= totalPageNumber ? "disabled" : ""}`}
+            className={`page-item cursor ${_page >= totalPageNumber ? "hide-item" : ""}`}
             onClick={() => handlePageNext()}
           >
             <span className='page-link'>
@@ -59,7 +59,7 @@ function Pagination() {
           </li>
 
           <li
-            className={`page-item cursor ${_page >= totalPageNumber ? "disabled" : ""}`}
+            className={`page-item cursor ${_page >= totalPageNumber ? "hide-item" : ""}`}
             onClick={() => handlePageChange(totalPageNumber)}
           >
             <span className='page-link'>
