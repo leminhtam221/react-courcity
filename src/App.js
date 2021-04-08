@@ -1,27 +1,26 @@
-import Footer from "components/Clients/Footer";
-import Header from "components/Clients/Header";
 import Loading from "components/Clients/Loading";
-import ReadyToBegin from "components/Clients/ReadyToBegin";
 import React, { lazy, Suspense } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-const HomePage = lazy(() => import("./pages/Clients/HomePage"));
-const CoursesPage = lazy(() => import("./pages/Clients/CoursesPage"));
-const NotFound = lazy(() => import("./components/Clients/NotFound"));
+import ClientRoute from "route/client";
+import clientRoute from "route/client/route";
+const NotFound = lazy(() => import("components/Clients/NotFound"));
 
 function App() {
   return (
     <BrowserRouter>
       <Suspense fallback={<Loading />}>
-        <Header />
         <Switch>
-          <Route path='/' component={HomePage} exact />
-          <Route path='/courses' component={CoursesPage} />
+          {clientRoute.map((item, index) => (
+            <ClientRoute
+              key={index}
+              path={item.path}
+              exact={item.exact}
+              Component={item.component}
+            />
+          ))}
 
-          <Route component={NotFound} />
+          <Route path='*' component={NotFound} />
         </Switch>
-
-        <ReadyToBegin />
-        <Footer />
       </Suspense>
     </BrowserRouter>
   );
