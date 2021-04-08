@@ -97,7 +97,7 @@ const menuDropdown = () => {
 
 const mainMenu = (listMenu) => {
   return listMenu.map((item, index) => (
-    <li className='nav-item dropdown'>
+    <li className='nav-item dropdown' key={index}>
       <NavLink className='nav-link' to={item.path} activeClassName='header-active' exact>
         {item.value} <span className='sr-only'>(current)</span>
       </NavLink>
