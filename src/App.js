@@ -13,14 +13,7 @@ function App() {
     <BrowserRouter>
       <Suspense fallback={<Loading />}>
         <Switch>
-          {clientRoute.map((item, index) => (
-            <ClientRoute
-              key={index}
-              path={item.path}
-              exact={item.exact}
-              Component={item.component}
-            />
-          ))}
+          {renderClientRoute(clientRoute)}
 
           <Route path='*'>
             <Header />
@@ -33,5 +26,16 @@ function App() {
     </BrowserRouter>
   );
 }
+
+const renderClientRoute = (listRoute) => {
+  return listRoute.map((item, index) => (
+    <ClientRoute
+      key={index}
+      path={item.path}
+      exact={item.exact}
+      Component={item.component}
+    />
+  ));
+};
 
 export default App;

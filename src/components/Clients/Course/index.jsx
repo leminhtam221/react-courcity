@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import "./course.css";
+import { Link } from "react-router-dom";
 
 Course.propTypes = {
   course: PropTypes.object.isRequired,
@@ -24,14 +25,14 @@ function Course(props) {
             >
               <i className='fas fa-play' />
             </a>
-            <a href='course-single.html'>Preview Course</a>
+            <Link to={`course/${course.id}`}>Preview Course</Link>
           </div>
         </div>
       </div>
       <div className='single-course-content'>
-        <a href='course-single.html' className='title-break'>
+        <Link to={`course/${course.id}`} className='title-break'>
           {course.course_name}
-        </a>
+        </Link>
         <p>
           {course.teacher.name}
           <span>

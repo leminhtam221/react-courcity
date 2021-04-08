@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import "./course-full-width.css";
+import { Link } from "react-router-dom";
 
 CourseFullWidth.propTypes = {
   course: PropTypes.object.isRequired,
@@ -26,21 +27,21 @@ function CourseFullWidth(props) {
                 <i className='fas fa-play' />
               </a>
               <br />
-              <a href='course-single-one.html'>Preview Course</a>
+              <Link to={`course/${course.id}`}>Preview Course</Link>
             </div>
           </div>
         </div>
       </div>
       <div className='media-body'>
         <h2>
-          <a href='course-single-one.html'>{course.course_name}</a>
+          <Link to={`course/${course.id}`}>{course.course_name}</Link>
         </h2>
         <h5>{course.teacher.name}</h5>
         <h4 className='mr-5'>${course.price}</h4>
-        <a href='course-single-one.html' className='btn-bordered'>
+        <Link to={`course/${course.id}`} className='btn-bordered'>
           {" "}
           View Course{" "}
-        </a>
+        </Link>
         <h3>
           <i className='fas fa-star' />
           <i className='fas fa-star' />
