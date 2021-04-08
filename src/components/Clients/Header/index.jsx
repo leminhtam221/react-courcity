@@ -1,7 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import "./header.css";
 
 function Header() {
+  const listMenu = [
+    { path: "/", value: "Home" },
+    { path: "/courses", value: "Courses" },
+  ];
   return (
     <div className='main-menu-1x'>
       <div className='container'>
@@ -26,129 +31,16 @@ function Header() {
                 >
                   <span className='navbar-toggler-icon' />
                 </button>
+
                 <div className='collapse navbar-collapse' id='navbarSupportedContent'>
                   <ul className='navbar-nav ml-auto main-menu-nav'>
-                    <li className='nav-item dropdown active'>
-                      <Link className='nav-link' to='/' id='navbarDropdownMenuLink1'>
-                        Home <span className='sr-only'>(current)</span>
-                      </Link>
-                      <ul
-                        className='dropdown-menu'
-                        aria-labelledby='navbarDropdownMenuLink1'
-                      >
-                        <li>
-                          <a className='dropdown-item' href='index.html' target='_blank'>
-                            Home One
-                          </a>
-                        </li>
-                        <li>
-                          <a
-                            className='dropdown-item'
-                            href='home-two.html'
-                            target='_blank'
-                          >
-                            Home Two
-                          </a>
-                        </li>
-                      </ul>
-                    </li>
-                    <li className='nav-item'>
-                      <Link className='nav-link' to='/courses'>
-                        Courses
-                      </Link>
-                    </li>
+                    {mainMenu(listMenu)}
+
                     <li className='nav-item dropdown'>
-                      <a className='nav-link' href='#/' id='navbarDropdownMenuLink2'>
+                      <a className='nav-link' href='#/'>
                         Pages
                       </a>
-                      <ul
-                        className='dropdown-menu'
-                        aria-labelledby='navbarDropdownMenuLink2'
-                      >
-                        <li>
-                          <a className='dropdown-item' href='learning-path.html'>
-                            Learning Path
-                          </a>
-                        </li>
-                        <li>
-                          <a
-                            className='dropdown-item dropdown-toggle'
-                            href='course-list.html'
-                          >
-                            Course
-                          </a>
-                          <ul className='dropdown-menu'>
-                            <li>
-                              <a className='dropdown-item' href='course-list.html'>
-                                All Course
-                              </a>
-                            </li>
-                            <li>
-                              <a className='dropdown-item' href='course-single-one.html'>
-                                Course Single One
-                              </a>
-                            </li>
-                            <li>
-                              <a className='dropdown-item' href='course-single-two.html'>
-                                Course Single Two
-                              </a>
-                            </li>
-                          </ul>
-                        </li>
-                        <li>
-                          <a className='dropdown-item dropdown-toggle' href='career.html'>
-                            Carrer
-                          </a>
-                          <ul className='dropdown-menu'>
-                            <li>
-                              <a className='dropdown-item' href='career.html'>
-                                Carrer
-                              </a>
-                            </li>
-                            <li>
-                              <a className='dropdown-item' href='career-single.html'>
-                                Carrer Single
-                              </a>
-                            </li>
-                          </ul>
-                        </li>
-                        <li>
-                          <a
-                            className='dropdown-item dropdown-toggle'
-                            href='our-team.html'
-                          >
-                            Events{" "}
-                          </a>
-                          <ul className='dropdown-menu'>
-                            <li>
-                              <a className='dropdown-item' href='events.html'>
-                                {" "}
-                                Events
-                              </a>
-                            </li>
-                            <li>
-                              <a className='dropdown-item' href='events-details.html'>
-                                Events Details{" "}
-                              </a>
-                            </li>
-                          </ul>
-                        </li>
-                        <li>
-                          <a className='dropdown-item' href='404.html'>
-                            404 Page
-                          </a>
-                        </li>
-                        <li>
-                          <a className='dropdown-item' href='comming-soon.html'>
-                            Comming Soon
-                          </a>
-                        </li>
-                        <li>
-                          <a className='dropdown-item' href='components.html'>
-                            Components
-                          </a>
-                        </li>
-                      </ul>
+                      {menuDropdown()}
                     </li>
                     <li className='nav-item dropdown'>
                       <a
@@ -158,26 +50,7 @@ function Header() {
                       >
                         Blog
                       </a>
-                      <ul
-                        className='dropdown-menu'
-                        aria-labelledby='navbarDropdownMenuLink4'
-                      >
-                        <li>
-                          <a className='dropdown-item' href='blog.html'>
-                            Grid View
-                          </a>
-                        </li>
-                        <li>
-                          <a className='dropdown-item' href='blog-list.html'>
-                            List View
-                          </a>
-                        </li>
-                        <li>
-                          <a className='dropdown-item' href='blog-single.html'>
-                            Blog Single
-                          </a>
-                        </li>
-                      </ul>
+                      {menuDropdown()}
                     </li>
                     <li className='nav-item'>
                       <a className='nav-link' href='contact-us.html'>
@@ -205,4 +78,31 @@ function Header() {
   );
 }
 
+const menuDropdown = () => {
+  return (
+    <ul className='dropdown-menu'>
+      <li>
+        <a className='dropdown-item' href='index.html' target='_blank'>
+          Menu One
+        </a>
+      </li>
+      <li>
+        <a className='dropdown-item' href='home-two.html' target='_blank'>
+          Menu Two
+        </a>
+      </li>
+    </ul>
+  );
+};
+
+const mainMenu = (listMenu) => {
+  return listMenu.map((item, index) => (
+    <li className='nav-item dropdown'>
+      <NavLink className='nav-link' to={item.path} activeClassName='header-active' exact>
+        {item.value} <span className='sr-only'>(current)</span>
+      </NavLink>
+      {menuDropdown()}
+    </li>
+  ));
+};
 export default Header;
