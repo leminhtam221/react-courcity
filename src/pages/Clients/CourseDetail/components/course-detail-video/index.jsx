@@ -1,8 +1,20 @@
 import React from "react";
+import PropTypes from "prop-types";
 
-function CourseDetailVideo() {
+CourseDetailVideo.propTypes = {
+  course: PropTypes.object,
+};
+CourseDetailVideo.defaultProps = {
+  course: {},
+};
+
+function CourseDetailVideo(props) {
+  const { course } = props;
   return (
-    <div className='course-video'>
+    <div
+      className='course-video'
+      style={{ backgroundImage: `url(${course.course_image})`, objectFit: "cover" }}
+    >
       <a href='https://www.youtube.com/watch?v=gwinFP8_qIM' className='btn-circle video'>
         <i className='fas fa-play' />
       </a>

@@ -5,6 +5,10 @@ const coursesApi = {
     const url = "/courses";
     return api.get(url, { params });
   },
+  getDetail(id, params) {
+    const url = `/courses/${id}`;
+    return api.get(url, { params });
+  },
 };
 
 export default coursesApi;

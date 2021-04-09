@@ -1,9 +1,17 @@
 import React from "react";
-// import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
-CourseDetailSideBar.propTypes = {};
+CourseDetailSideBar.propTypes = {
+  categoryName: PropTypes.string,
+  course: PropTypes.object,
+};
+CourseDetailSideBar.defaultProps = {
+  categoryName: "",
+  course: {},
+};
 
 function CourseDetailSideBar(props) {
+  const { categoryName, course } = props;
   return (
     <div className='course-details-sidebar'>
       <div className='course-feature'>
@@ -16,7 +24,7 @@ function CourseDetailSideBar(props) {
             <i className='far fa-clock' /> Duration <span> 60H </span>
           </li>
           <li>
-            <i className='far fa-user' /> Students <span> 45 </span>
+            <i className='far fa-user' /> Students <span> {course.enroll} </span>
           </li>
           <li>
             <i className='fas fa-certificate' /> Certificate <span> Yes </span>
@@ -25,7 +33,7 @@ function CourseDetailSideBar(props) {
             <i className='far fa-lightbulb' /> Skill <span> Beginner </span>
           </li>
           <li>
-            <i className='far fa-bookmark' /> Category <span> Design </span>
+            <i className='far fa-bookmark' /> Category <span> {categoryName} </span>
           </li>
         </ul>
       </div>

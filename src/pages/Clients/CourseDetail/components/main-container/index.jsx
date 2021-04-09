@@ -5,35 +5,46 @@ import RelatedCourse from "../related-course";
 import CourseDetailNav from "../course-detail-nav";
 import CourseDetailVideo from "../course-detail-video";
 import CourseDetailTab from "../course-detail-tab";
-// import PropTypes from "prop-types";
+import PropTypes from "prop-types";
 
-MainContainer.propTypes = {};
+MainContainer.propTypes = {
+  course: PropTypes.object,
+  courseRelated: PropTypes.array,
+};
+MainContainer.defaultProps = {
+  course: {},
+  courseRelated: [],
+};
 
 function MainContainer(props) {
+  const { course, courseRelated } = props;
   return (
     <div className='course-single-body'>
       <div className='container'>
-        <CourseDetailInfo />
+        <CourseDetailInfo course={course} />
       </div>
       <div className='container'>
         <div className='course-details-1x'>
           <div className='row'>
             <div className='col-md-8'>
               <div className='course-details-left'>
-                <CourseDetailVideo />
+                <CourseDetailVideo course={course} />
                 <div className='course-menu-nav'>
                   <CourseDetailNav />
-                  <CourseDetailTab />
+                  <CourseDetailTab course={course} />
                 </div>
               </div>
             </div>
             <div className='col-md-4'>
-              <CourseDetailSideBar />
+              <CourseDetailSideBar
+                categoryName={course.category.category_name}
+                course={course}
+              />
             </div>
           </div>
         </div>
       </div>
-      <RelatedCourse />
+      <RelatedCourse courseRelated={courseRelated} />
     </div>
   );
 }
