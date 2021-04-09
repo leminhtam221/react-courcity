@@ -26,7 +26,7 @@ function Pagination() {
 
   return (
     <div className='col-md-12'>
-      <div className='course-pagination'>
+      <div className='course-pagination mt-0'>
         <ul className='pagination'>
           <li
             className={`page-item cursor ${_page <= 1 ? "hide-item" : ""}`}

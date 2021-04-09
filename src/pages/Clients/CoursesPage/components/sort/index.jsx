@@ -6,13 +6,15 @@ import queryString from "query-string";
 
 Sort.propTypes = {
   onSortChange: PropTypes.func,
+  scroll: PropTypes.object,
 };
 Sort.defaultProps = {
   onSortChange: null,
+  scroll: null,
 };
 
 function Sort(props) {
-  const { onSortChange } = props;
+  const { onSortChange, scroll } = props;
   const location = useLocation();
   const queryParams = queryString.parse(location.search);
 
@@ -41,7 +43,7 @@ function Sort(props) {
   }, [queryParams._order, queryParams._sort]);
 
   return (
-    <div className='search-box d-flex flex-row'>
+    <div className='search-box d-flex flex-row' ref={scroll}>
       <p>Sort by : </p>
       <select
         className='form-control styleSelect'

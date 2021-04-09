@@ -4,7 +4,7 @@ import CardLoaing from "components/Clients/Loading/CardLoading";
 import CardLoadingMedia from "components/Clients/Loading/CardLoadingMedia";
 import Pagination from "components/Clients/Pagination";
 import PropTypes from "prop-types";
-import React from "react";
+import React, { useRef } from "react";
 import FilterCategory from "../filter-category";
 import FilterPrice from "../filter-price";
 import NavTab from "../nav-tab";
@@ -44,6 +44,8 @@ function MainContainer(props) {
     onPriceHighChange,
     onClickRemoveFilter,
   } = props;
+
+  const scroll = useRef(null);
   return (
     <div className='course-header-1x'>
       <div className='container'>
@@ -68,7 +70,7 @@ function MainContainer(props) {
             <div className='course-header-right'>
               <div className='row'>
                 <div className='col-md-6'>
-                  <Sort onSortChange={onSortChange} />
+                  <Sort onSortChange={onSortChange} scroll={scroll} />
                 </div>
                 <div className='col-md-6'>
                   <NavTab />
@@ -91,7 +93,7 @@ function MainContainer(props) {
                             {loading ? (
                               <CardLoaing col={4} length={6} />
                             ) : (
-                              renderCourses(courseList)
+                              renderCourses(courseList, scroll)
                             )}
                           </div>
                         </div>
@@ -125,7 +127,9 @@ function MainContainer(props) {
   );
 }
 
-const renderCourses = (coursesList) => {
+const renderCourses = (coursesList, scroll) => {
+  if (coursesList.length <= 3) scroll.current.scrollIntoView({ behavior: "smooth" });
+
   return coursesList.map((item) => (
     <div className={`col-md-4`} key={item.id}>
       <Course course={item} />
