@@ -1,14 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import SignUpBackground from "./components/sign-up-background";
 import SignUpForm from "./components/sign-up-form";
 import { register } from "redux/userSlice";
 import { useDispatch } from "react-redux";
 import { unwrapResult } from "@reduxjs/toolkit";
 import swal from "sweetalert";
+import SpinnerLoading from "components/Clients/Loading/SpinerLoading";
 
 function SignUpPage(props) {
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
   const handleSubmitForm = async (value) => {
+    setLoading(true);
     try {
       const data = {
         email: value.email,
@@ -32,10 +35,12 @@ function SignUpPage(props) {
         });
       }
     }
+    setLoading(false);
   };
 
   return (
     <div className='sign-in-1x'>
+      {loading ? <SpinnerLoading /> : ""}
       <div className='container'>
         <div className='form-container'>
           <div className='row'>

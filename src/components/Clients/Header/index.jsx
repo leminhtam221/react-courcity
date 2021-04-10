@@ -1,5 +1,7 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
+import { logout } from "redux/userSlice";
 import "./header.css";
 
 function Header() {
@@ -7,6 +9,12 @@ function Header() {
     { path: "/", value: "Home" },
     { path: "/courses", value: "Courses" },
   ];
+  const user = useSelector((state) => state.user.user);
+  const dispatch = useDispatch();
+  const handleLogout = () => {
+    const action = logout();
+    dispatch(action);
+  };
   return (
     <div className='main-menu-1x'>
       <div className='container'>
@@ -57,26 +65,49 @@ function Header() {
                         Contact Us
                       </a>
                     </li>
-                    <li className='nav-item dropdown'>
-                      <NavLink
-                        className='nav-link'
-                        to='/sign-in'
-                        activeClassName='header-active'
-                        exact
-                      >
-                        Sign in <span className='sr-only'>(current)</span>
-                      </NavLink>
-                    </li>
-                    <li className='nav-item dropdown'>
-                      <NavLink
-                        className='nav-link'
-                        to='/sign-up'
-                        activeClassName='header-active'
-                        exact
-                      >
-                        Sign up <span className='sr-only'>(current)</span>
-                      </NavLink>
-                    </li>
+
+                    {!user.id && (
+                      <React.Fragment>
+                        <li className='nav-item dropdown'>
+                          <NavLink
+                            className='nav-link'
+                            to='/sign-up'
+                            activeClassName='header-active'
+                            exact
+                          >
+                            Sign up <span className='sr-only'>(current)</span>
+                          </NavLink>
+                        </li>
+                        <li className='nav-item dropdown'>
+                          <NavLink
+                            className='nav-link'
+                            to='/sign-in'
+                            activeClassName='header-active'
+                            exact
+                          >
+                            Sign in <span className='sr-only'>(current)</span>
+                          </NavLink>
+                        </li>
+                      </React.Fragment>
+                    )}
+
+                    {user.id && (
+                      <li className='nav-item'>
+                        <div
+                          className='nav-link'
+                          style={{ padding: "10px 15px", cursor: "pointer" }}
+                        >
+                          Le Minh Tam
+                        </div>
+                        <ul className='dropdown-menu' style={{ minWidth: "100%" }}>
+                          <li className='p-0' onClick={handleLogout}>
+                            <div className='dropdown-item' style={{ cursor: "pointer" }}>
+                              Log out
+                            </div>
+                          </li>
+                        </ul>
+                      </li>
+                    )}
                   </ul>
                 </div>
               </nav>
