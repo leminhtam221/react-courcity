@@ -61,7 +61,7 @@ function HomePage() {
   return (
     <React.Fragment>
       <Banner categoryList={categoryList} />
-      <Category categoryList={categoryLimit} />
+      <Category categoryList={categoryLimit} loading={loading} />
       {loading ? (
         renderLoading(filter._limit)
       ) : (

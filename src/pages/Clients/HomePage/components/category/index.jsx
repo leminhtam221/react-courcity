@@ -1,25 +1,35 @@
 import React from "react";
-
 import PropTypes from "prop-types";
+import CategoryLoading from "components/Clients/Loading/CategoryLoading";
 
 Category.propTypes = {
   categoryList: PropTypes.array,
+  loading: PropTypes.bool,
 };
 
 Category.defaultProps = {
   categoryList: [],
+  loading: true,
 };
 
 function Category(props) {
-  const { categoryList } = props;
+  const { categoryList, loading } = props;
 
   return (
     <div className='course-category-1x'>
       <div className='container'>
         <div className='row'>
-          <div className='col-md-6'>{renderCategoryLeft(categoryList)}</div>
           <div className='col-md-6'>
-            <div className='row'>{renderCategoryRight(categoryList)}</div>
+            {loading ? (
+              <CategoryLoading className='left-image' />
+            ) : (
+              renderCategoryLeft(categoryList)
+            )}
+          </div>
+          <div className='col-md-6'>
+            <div className='row'>
+              {loading ? renderCategoryLoading() : renderCategoryRight(categoryList)}
+            </div>
           </div>
           <div className='category-feature'>
             <div className='col-md-12'>
@@ -86,6 +96,14 @@ const renderCategoryLeft = (categoryList) => {
       </div>
     </div>
   );
+};
+
+const renderCategoryLoading = () => {
+  return Array.from(new Array(4)).map((item, index) => (
+    <div className='col-md-6' key={index}>
+      <CategoryLoading />
+    </div>
+  ));
 };
 
 const renderCategoryRight = (categoryList) => {

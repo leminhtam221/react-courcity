@@ -53,7 +53,7 @@ function SignInForm(props) {
                 type='submit'
                 style={{ cursor: "pointer" }}
               >
-                submit
+                Sign in
               </button>
               <p>Or login with</p>
               <ul>

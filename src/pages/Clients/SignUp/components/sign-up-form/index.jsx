@@ -80,7 +80,7 @@ function SignUpForm(props) {
                   type='submit'
                   style={{ cursor: "pointer" }}
                 >
-                  submit
+                  Sign up
                 </button>
               </div>
 
