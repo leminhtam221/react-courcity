@@ -19,7 +19,7 @@ function HomePage() {
   const [filter] = useState({
     _sort: "enroll",
     _order: "desc",
-    _limit: 8,
+    _limit: 12,
     _expand: "teacher",
   });
 

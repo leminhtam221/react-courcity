@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import CategoryLoading from "components/Clients/Loading/CategoryLoading";
+import { Link } from "react-router-dom";
 
 Category.propTypes = {
   categoryList: PropTypes.array,
@@ -83,14 +84,19 @@ const renderCategoryLeft = (categoryList) => {
   return (
     <div className='category-left left-image'>
       <div className='hvrbox'>
-        <img src='assets/images/1.jpg' alt='slide 1' className='hvrbox-layer_bottom' />
+        <img
+          src={category.category_image}
+          alt='slide 1'
+          className='hvrbox-layer_bottom'
+        />
         <div className='hvrbox-layer_top'>
           <div className='hvrbox-text'>
-            <a href='#/'>{category.category_name}</a>
-            <h5>800 Course</h5>
-            <a href='#/' className='btn-small'>
+            <Link to={`/courses?categoryId=${category.id}`}>
+              {category.category_name}
+            </Link>
+            <Link to={`/courses?categoryId=${category.id}`} className='btn-small'>
               View Details
-            </a>
+            </Link>
           </div>
         </div>
       </div>
@@ -115,17 +121,21 @@ const renderCategoryRight = (categoryList) => {
         <div className='category-left right-image'>
           <div className='hvrbox'>
             <img
-              src='assets/images/5.jpg'
+              src={categoryList[i].category_image}
               alt='slide 1'
               className='hvrbox-layer_bottom'
             />
             <div className='hvrbox-layer_top hvrbox-text'>
               <div className='hvrbox-text'>
-                <a href='#/'>{categoryList[i].category_name}</a>
-                <h5>700 Course</h5>
-                <a href='#/' className='btn-small'>
+                <Link to={`/courses?categoryId=${categoryList[i].id}`}>
+                  {categoryList[i].category_name}
+                </Link>
+                <Link
+                  to={`/courses?categoryId=${categoryList[i].id}`}
+                  className='btn-small'
+                >
                   View Details
-                </a>
+                </Link>
               </div>
             </div>
           </div>

@@ -40,7 +40,7 @@ function TopCourses(props) {
                 {renderCourses(courseList)}
 
                 <div className='col-md-12 text-center'>
-                  <Link className='btn-small' to='/'>
+                  <Link className='btn-small' to='/courses'>
                     View more
                   </Link>
                 </div>
