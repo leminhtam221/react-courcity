@@ -6,7 +6,6 @@ import SignInForm from "./components/sign-in-form";
 import SignInBackground from "./components/sign-in-background";
 import swal from "sweetalert";
 import { useHistory } from "react-router";
-import Loading from "components/Clients/Loading";
 import SpinnerLoading from "components/Clients/Loading/SpinerLoading";
 
 function SignInPage() {
