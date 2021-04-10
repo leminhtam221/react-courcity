@@ -45,7 +45,7 @@ function Header() {
                     {mainMenu(listMenu)}
 
                     <li className='nav-item dropdown'>
-                      <a className='nav-link' href='#/'>
+                      <a className='nav-link' href='contact-us.html'>
                         Pages
                       </a>
                       {menuDropdown()}
@@ -123,12 +123,12 @@ const menuDropdown = () => {
   return (
     <ul className='dropdown-menu'>
       <li>
-        <a className='dropdown-item' href='index.html' target='_blank'>
+        <a className='dropdown-item' href='index.html'>
           Menu One
         </a>
       </li>
       <li>
-        <a className='dropdown-item' href='home-two.html' target='_blank'>
+        <a className='dropdown-item' href='home-two.html'>
           Menu Two
         </a>
       </li>

@@ -6,8 +6,10 @@ import { useDispatch } from "react-redux";
 import { unwrapResult } from "@reduxjs/toolkit";
 import swal from "sweetalert";
 import SpinnerLoading from "components/Clients/Loading/SpinerLoading";
+import { useHistory } from "react-router";
 
 function SignUpPage(props) {
+  const history = useHistory();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const handleSubmitForm = async (value) => {
@@ -26,6 +28,7 @@ function SignUpPage(props) {
           title: "Register successfully",
           icon: "success",
         });
+        history.push({ pathname: "/" });
       }
     } catch (error) {
       if (error.message === "Request failed with status code 400") {
