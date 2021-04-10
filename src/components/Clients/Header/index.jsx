@@ -57,15 +57,25 @@ function Header() {
                         Contact Us
                       </a>
                     </li>
-                    <li className='nav-item sign-in'>
-                      <a className='nav-link' href='sign-in.html'>
-                        Sign in
-                      </a>
+                    <li className='nav-item dropdown'>
+                      <NavLink
+                        className='nav-link'
+                        to='/sign-in'
+                        activeClassName='header-active'
+                        exact
+                      >
+                        Sign in <span className='sr-only'>(current)</span>
+                      </NavLink>
                     </li>
-                    <li className='nav-item'>
-                      <a className='btn-small' href='#/'>
-                        Get Started
-                      </a>
+                    <li className='nav-item dropdown'>
+                      <NavLink
+                        className='nav-link'
+                        to='/sign-up'
+                        activeClassName='header-active'
+                        exact
+                      >
+                        Sign up <span className='sr-only'>(current)</span>
+                      </NavLink>
                     </li>
                   </ul>
                 </div>
