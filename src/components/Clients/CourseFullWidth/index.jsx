@@ -36,7 +36,7 @@ function CourseFullWidth(props) {
         <h2>
           <Link to={`course/${course.id}`}>{course.course_name}</Link>
         </h2>
-        <h5>{course.teacher.name}</h5>
+        <h5>{course.users.name}</h5>
         <h4 className='mr-5'>${course.price}</h4>
         <Link to={`course/${course.id}`} className='btn-bordered'>
           {" "}

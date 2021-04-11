@@ -22,7 +22,7 @@ function CoursesPage() {
     ...queryParams,
     _sort: queryParams._sort || "id",
     _order: queryParams._order || "desc",
-    _expand: "teacher",
+    _expand: "users",
     _page: parseInt(queryParams._page) || 1,
     _limit: parseInt(queryParams._limit) || 6,
     price_gte: parseInt(queryParams.price_gte) || 0,

@@ -20,7 +20,7 @@ function HomePage() {
     _sort: "enroll",
     _order: "desc",
     _limit: 12,
-    _expand: "teacher",
+    _expand: "users",
   });
 
   useImportScript();

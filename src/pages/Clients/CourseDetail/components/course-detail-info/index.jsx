@@ -10,16 +10,16 @@ CourseDetailInfo.defaultProps = {
 
 function CourseDetailInfo(props) {
   const { course } = props;
-  const { teacher } = course;
+  const { users } = course;
   return (
     <div className='course-info-1x course-info-2x'>
       <div className='row'>
         <div className='col-md-4'>
           <div className='course-info-left'>
             <div className='media'>
-              <img src={teacher.avatar} alt='testimonial' />
+              <img src={users.avatar} alt='testimonial' />
               <div className='media-body'>
-                <h3>{teacher.name}</h3>
+                <h3>{users.name}</h3>
                 <p>Visual Instructor</p>
               </div>
             </div>

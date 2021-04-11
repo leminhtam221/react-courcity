@@ -34,7 +34,7 @@ function Course(props) {
           {course.course_name}
         </Link>
         <p>
-          {course.teacher.name}
+          {course.users.name}
           <span>
             <b>${course.price}</b>
           </span>

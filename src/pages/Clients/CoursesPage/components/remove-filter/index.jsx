@@ -18,7 +18,7 @@ function RemoveFilter(props) {
     return {
       _sort: "id",
       _order: "desc",
-      _expand: "teacher",
+      _expand: "users",
       _page: 1,
       _limit: 6,
       price_gte: 0,
