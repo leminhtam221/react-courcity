@@ -1,5 +1,7 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
+import { useLocation } from "react-router";
+import queryString from "query-string";
 
 Banner.propTypes = {
   onSearchChange: PropTypes.func,
@@ -10,6 +12,8 @@ Banner.defaultProps = {
 
 function Banner(props) {
   const { onSearchChange } = props;
+  const location = useLocation();
+  const queryParams = queryString.parse(location.search);
   const [search, setSearch] = useState("");
   const typingTimeoutRef = useRef(null);
   const handleChange = (e) => {
@@ -27,6 +31,13 @@ function Banner(props) {
     if (search === "") return;
     onSearchChange(search);
   };
+  useEffect(() => {
+    if (queryParams.q) {
+      setSearch(queryParams.q);
+    } else {
+      setSearch("");
+    }
+  }, [queryParams.q]);
   return (
     <div className='main-banner course-list-banner'>
       <div className='hvrbox'>

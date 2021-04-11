@@ -128,7 +128,8 @@ function MainContainer(props) {
 }
 
 const renderCourses = (coursesList, scroll) => {
-  if (coursesList.length <= 3) scroll.current.scrollIntoView({ behavior: "smooth" });
+  if (coursesList.length >= 1 && coursesList.length <= 3)
+    scroll.current.scrollIntoView({ behavior: "smooth" });
 
   return coursesList.map((item) => (
     <div className={`col-md-4`} key={item.id}>
