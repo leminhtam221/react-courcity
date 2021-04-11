@@ -3,9 +3,11 @@ import Header from "components/Clients/Header";
 import Loading from "components/Clients/Loading";
 import ReadyToBegin from "components/Clients/ReadyToBegin";
 import ScrollToTop from "hooks/scroll-to-top";
+import DashBoardPage from "pages/Clients/Dashboard";
 import React, { lazy, Suspense } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ClientRoute from "route/client";
+import GuardRoute from "route/client/guard";
 import clientRoute from "route/client/route";
 const NotFound = lazy(() => import("components/Clients/NotFound"));
 
@@ -16,7 +18,7 @@ function App() {
         <ScrollToTop />
         <Switch>
           {renderClientRoute(clientRoute)}
-
+          <GuardRoute path='/dashboard' Component={DashBoardPage} />
           <Route path='*'>
             <Header />
             <NotFound />

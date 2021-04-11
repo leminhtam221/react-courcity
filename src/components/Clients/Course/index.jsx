@@ -9,14 +9,16 @@ Course.propTypes = {
 
 function Course(props) {
   const { course } = props;
+  let img;
+  if (course.course_image !== "") {
+    img = course.course_image;
+  } else {
+    img = "assets/images/default-img.jpg";
+  }
   return (
     <div className='single-course cover'>
       <div className='hvrbox'>
-        <img
-          src={course.course_image}
-          alt={`${course.course_name}`}
-          className='hvrbox-layer_bottom'
-        />
+        <img src={img} alt={`${course.course_name}`} className='hvrbox-layer_bottom' />
         <div className='hvrbox-layer_top hvrbox-text'>
           <div className='hvrbox-text'>
             <a

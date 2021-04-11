@@ -9,6 +9,14 @@ const coursesApi = {
     const url = `/courses/${id}`;
     return api.get(url, { params });
   },
+  addCourse(data) {
+    const url = `/courses/`;
+    return api.post(url, data);
+  },
+  deleteCourse(id) {
+    const url = `/courses/${id}`;
+    return api.delete(url);
+  },
 };
 
 export default coursesApi;

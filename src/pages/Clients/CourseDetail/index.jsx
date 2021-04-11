@@ -22,10 +22,10 @@ function CourseDetailPage() {
 
       try {
         const courseData = await coursesApi.getDetail(id, {
-          _expand: ["category", "teacher"],
+          _expand: ["category", "users"],
         });
         const courseRelatedList = await coursesApi.getAll({
-          _expand: "teacher",
+          _expand: "users",
           categoryId: courseData.data.categoryId,
           _limit: 8,
           id_ne: courseData.data.id,

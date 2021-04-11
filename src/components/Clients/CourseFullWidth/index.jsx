@@ -9,15 +9,17 @@ CourseFullWidth.propTypes = {
 
 function CourseFullWidth(props) {
   const { course } = props;
+  let img;
+  if (course.course_image !== "") {
+    img = course.course_image;
+  } else {
+    img = "assets/images/default-img.jpg";
+  }
   return (
     <div className='media'>
       <div className='media-left-image'>
         <div className='hvrbox'>
-          <img
-            src={course.course_image}
-            alt='slide 1'
-            className='hvrbox-layer_bottom image-cover'
-          />
+          <img src={img} alt='slide 1' className='hvrbox-layer_bottom image-cover' />
           <div className='hvrbox-layer_top hvrbox-text'>
             <div className='hvrbox-text'>
               <a

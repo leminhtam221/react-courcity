@@ -26,8 +26,9 @@ function SignInPage() {
         swal({
           title: "Login success",
           icon: "success",
+        }).then(() => {
+          history.push({ pathname: "/" });
         });
-        history.push({ pathname: "/" });
       }
     } catch (error) {
       if (error.message === "Request failed with status code 400") {

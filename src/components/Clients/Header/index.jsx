@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useHistory } from "react-router-dom";
 import { logout } from "redux/userSlice";
 import "./header.css";
 
@@ -10,10 +10,12 @@ function Header() {
     { path: "/courses", value: "Courses" },
   ];
   const user = useSelector((state) => state.user.user);
+  const history = useHistory();
   const dispatch = useDispatch();
   const handleLogout = () => {
     const action = logout();
     dispatch(action);
+    history.push({ pathname: "/sign-in" });
   };
   return (
     <div className='main-menu-1x'>
@@ -93,12 +95,13 @@ function Header() {
 
                     {user.id && (
                       <li className='nav-item'>
-                        <div
+                        <Link
+                          to='/dashboard'
                           className='nav-link'
                           style={{ padding: "10px 15px", cursor: "pointer" }}
                         >
-                          Le Minh Tam
-                        </div>
+                          {user.name}
+                        </Link>
                         <ul className='dropdown-menu' style={{ minWidth: "100%" }}>
                           <li className='p-0' onClick={handleLogout}>
                             <div className='dropdown-item' style={{ cursor: "pointer" }}>

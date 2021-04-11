@@ -12,14 +12,15 @@ function SignUpPage(props) {
   const history = useHistory();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
+
   const handleSubmitForm = async (value) => {
+    const data = {
+      email: value.email,
+      name: value.fullname,
+      password: value.password,
+    };
     setLoading(true);
     try {
-      const data = {
-        email: value.email,
-        fullname: value.fullname,
-        password: value.password,
-      };
       const action = register(data);
       const resultAction = await dispatch(action);
       const user = unwrapResult(resultAction);
@@ -27,8 +28,9 @@ function SignUpPage(props) {
         swal({
           title: "Register successfully",
           icon: "success",
+        }).then(() => {
+          history.push({ pathname: "/" });
         });
-        history.push({ pathname: "/" });
       }
     } catch (error) {
       if (error.message === "Request failed with status code 400") {
