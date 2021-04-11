@@ -126,9 +126,12 @@ function CoursesPage() {
   const handleRemoveFilter = (defaultFilter) => {
     setFilter({ ...defaultFilter });
   };
+  const handleSearchChange = (searchText) => {
+    setFilter({ ...filter, q: searchText });
+  };
   return (
     <React.Fragment>
-      <Banner />
+      <Banner onSearchChange={handleSearchChange} />
       <MainContainer
         courseList={courseList}
         loading={loading}

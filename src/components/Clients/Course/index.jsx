@@ -30,7 +30,7 @@ function Course(props) {
         </div>
       </div>
       <div className='single-course-content'>
-        <Link to={`course/${course.id}`} className='title-break'>
+        <Link to={`/course/${course.id}`} className='title-break'>
           {course.course_name}
         </Link>
         <p>

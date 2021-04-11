@@ -1,0 +1,38 @@
+.search-complete {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 91.6%;
+  margin: 0;
+  padding: 0;
+
+  border: 1px solid #000000;
+  background: white;
+  border-top: 0;
+  list-style: none;
+  text-align: left;
+  overflow-y: scroll;
+  max-height: 500px;
+}
+.search-complete-item {
+  padding: 2px 20px;
+  cursor: pointer;
+}
+.search-complete-item:hover {
+  background: #cccccc59;
+}
+.hide-item {
+  display: none;
+  visibility: hidden;
+}
+.scroll-bar::-webkit-scrollbar {
+  width: 6px;
+  background-color: #f0eaea;
+}
+.scroll-bar::-webkit-scrollbar-thumb {
+  background-color: #746d6d;
+}
+
+.disabled-button {
+  cursor: no-drop !important;
+}
