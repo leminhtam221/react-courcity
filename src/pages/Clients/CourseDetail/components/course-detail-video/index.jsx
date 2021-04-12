@@ -10,10 +10,16 @@ CourseDetailVideo.defaultProps = {
 
 function CourseDetailVideo(props) {
   const { course } = props;
+  let img;
+  if (course.course_image !== "") {
+    img = course.course_image;
+  } else {
+    img = "assets/images/default-img.jpg";
+  }
   return (
     <div
       className='course-video'
-      style={{ backgroundImage: `url(${course.course_image})`, objectFit: "cover" }}
+      style={{ backgroundImage: `url(${img})`, objectFit: "cover" }}
     >
       <a href='https://www.youtube.com/watch?v=gwinFP8_qIM' className='btn-circle video'>
         <i className='fas fa-play' />

@@ -19,7 +19,7 @@ function FormAddEdit(props) {
   const [file, setFile] = useState();
 
   const validate = yup.object().shape({
-    courseName: yup
+    course_name: yup
       .string()
       .required("Name is required")
       .min(10, "Name must be at least 10 characters"),
@@ -48,20 +48,20 @@ function FormAddEdit(props) {
   return (
     <Formik
       initialValues={{
-        courseName: "",
+        course_name: "",
         price: "",
         description: "",
-        category: 1,
+        categoryId: 1,
       }}
       validationSchema={validate}
       onSubmit={handleSubmit}
     >
       <Form>
-        <FastField name='courseName' component={FormGroup} placeholder='Course name' />
+        <FastField name='course_name' component={FormGroup} placeholder='Course name' />
         <FastField name='price' component={FormGroup} placeholder='Price' type='number' />
         <FastField name='description' component={FormGroup} placeholder='Description' />
         <Field
-          name='category'
+          name='categoryId'
           component={SelectOption}
           placeholder='Category'
           category={category}

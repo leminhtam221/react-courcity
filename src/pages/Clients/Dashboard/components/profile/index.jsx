@@ -9,10 +9,9 @@ function Profile(props) {
     >
       <div className='bg-white rounded shadow-sm py-5 px-4'>
         <img
-          src='https://bootdey.com/img/Content/avatar/avatar2.png'
+          src='https://vnn-imgs-a1.vgcloud.vn/image1.ictnews.vn/_Files/2020/03/17/trend-avatar-1.jpg'
           alt='avatar'
-          width={100}
-          className='img-fluid rounded-circle mb-3 img-thumbnail shadow-sm'
+          className='img-fluid mb-3 img-thumbnail shadow-sm'
         />
         <h5 className='mb-0'>{user.name}</h5>
         <span className='small text-uppercase text-muted'>Web developer</span>

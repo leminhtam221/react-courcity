@@ -18,6 +18,8 @@ function SignUpPage(props) {
       email: value.email,
       name: value.fullname,
       password: value.password,
+      avatar:
+        "https://vnn-imgs-a1.vgcloud.vn/image1.ictnews.vn/_Files/2020/03/17/trend-avatar-1.jpg",
     };
     setLoading(true);
     try {
